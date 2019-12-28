@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel index.html",
+    "dev:client": "npm start",
+    "dev:server": "node server.js",
     "build": "parcel build index.html"
   },
   "repository": {
@@ -20,5 +22,6 @@
   "homepage": "https://github.com/AndreyBaglai/fancy-weather#readme",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
-  }
+  },
+  "dependencies": {}
 }
