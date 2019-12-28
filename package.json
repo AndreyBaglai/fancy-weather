@@ -1,0 +1,24 @@
+{
+  "name": "fancy-weather",
+  "version": "1.0.0",
+  "description": "fancy-weather",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreyBaglai/fancy-weather.git"
+  },
+  "author": "andreybaglai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreyBaglai/fancy-weather/issues"
+  },
+  "homepage": "https://github.com/AndreyBaglai/fancy-weather#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
