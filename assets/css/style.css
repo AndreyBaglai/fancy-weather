@@ -1,17 +1,28 @@
 body {
     margin: 0;
-    max-width: 100vw;
-    max-height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     color: #fff;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
+    overflow-y: hidden;
 }
 
 #root {
   margin: 50px auto;
   max-width: 1200px;
 }
+
+.black-bg {
+  display: flex;
+  border-radius: 8px;
+  background-color: #000;
+  opacity: .8;
+  padding: 20px;
+  margin: 12px;
+}
+
 
 .grow {
   flex-grow: 1;
@@ -30,6 +41,7 @@ body {
   background-color: #807e82;
   font-weight: bold;
   cursor: pointer;
+  font-size: 16px;
 }
 
 #refresh {
@@ -46,16 +58,16 @@ select {
     padding: 0;
 }
 
-#temperature button {
+/* #temperature button {
   background-color: #312f37;
   width: inherit;
   height: inherit;
   margin: 0;
   padding: 0;
 }  
-
+ */
 .active-temperature {
-  background-color: #3b4935;
+  background-color: #3d6e28;
 }
             
 .search-block {
@@ -67,17 +79,10 @@ select {
   background-color: transparent;
   margin: 0;
   border-radius: 2px;
+  font-size: 16px;
+  color: #fff;
 }
          
-.black-bg {
-  display: flex;
-  border-radius: 8px;
-  background-color: #000;
-  opacity: .7;
-  padding: 20px;
-  margin: 12px;
-}
-
 main {
   display: flex;
 }
