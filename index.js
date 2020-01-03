@@ -13,11 +13,11 @@ function getWeatherForecast(locationCoordinates) {
         .then(res => res.json());
 }
 
-function getBackgroundFoto() {
+function getBackgroundPhoto() {
     //const proxy = 'https://cors-anywhere.herokuapp.com/';
     const PHOTO_API_TOKEN = 'd5fbdbc4ae0848723de931f78c74fb1622310a4dcbe00be8d17db8343b6f037b';
 
-    return fetch(`https://api.unsplash.com/search/photos?query=dnipro&client_id=${PHOTO_API_TOKEN}`)
+    return fetch(`https://api.unsplash.com/search/photos?query=Madrid&client_id=${PHOTO_API_TOKEN}`)
         .then(res => res.json());
 }
 
@@ -31,9 +31,14 @@ function init() {
                     console.log('forecast: ', forecast);
                 });
         });
-    getBackgroundFoto()
+    getBackgroundPhoto()
         .then(photos => {
-            console.log('photos: ', photos);
+            const picturesBody = photos.results.map(obj => {
+                return obj.urls.raw;
+            });
+            const randomIndex = Math.floor(Math.random() * picturesBody.length);
+            document.body.style.backgroundImage = `url(${picturesBody[randomIndex]})`;
+            console.log('photos: ', picturesBody, randomIndex);
         });
 }
 

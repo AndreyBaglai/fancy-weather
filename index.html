@@ -6,10 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fancy-weather</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <div class="root"></div>
+    <div id="root">
+        <header class="controls">
+            <div class="black-bg grow">
+                <button id="refresh" class="btn">Refresh</button>
+
+                <div id="languages" class="btn">
+                    <select>
+                        <option>RU</option>
+                        <option>EN</option>
+                    </select>
+                </div>
+
+                <div id="temperature" class="btn">
+                    <button id="celsius" class="active-temperature">&#8451;</button>
+                    <button id="fahrenheit">&#8457;</button>
+                </div>
+            </div>
+
+            <div class="black-bg">
+                <div class="search-block">
+                    <input id="searchField" type="text" placeholder="Search city">
+                    <button id="searchBtn" class="btn">Search</button>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="main-content grow">
+                <div class="black-bg">
+                    <div class="state">
+                        <p class="country">Ukrain,</p>
+                        <p class="city">Dnipro</p>
+                    </div>
+                </div>
+
+                <div class="black-bg">
+                    <div class="current-date">
+                        <p>Wed 25 December <span class="time">Time</span></p>
+                    </div>
+                </div>
+
+                <div class="black-bg">
+                    <div class="forecast">7C</div>
+                </div>
+            </div>
+
+            <div class="black-bg">
+                <div class="map">
+                    <div class="mapApi">map</div>
+                    <div class="coordinates">
+                        <p class="latitude">Latitude: 58:1111</p>
+                        <p class="longitude">Longitude: 58:1111</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script src="./index.js"></script>
 </body>
