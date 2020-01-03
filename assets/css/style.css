@@ -1,0 +1,97 @@
+body {
+    margin: 0;
+    max-width: 100vw;
+    max-height: 100vh;
+    color: #fff;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#root {
+  margin: 50px auto;
+  max-width: 1200px;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.controls {
+  display: flex;
+}
+
+.btn {
+  text-transform: uppercase;
+  border: #fff solid 1px;
+  border-radius: 4px;
+  text-align: center;
+  color: #fff;
+  background-color: #807e82;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#refresh {
+                
+}
+
+#languages {
+  margin: 0 20px;
+}
+
+select {
+    width: inherit;
+    height: inherit;
+    padding: 0;
+}
+
+#temperature button {
+  background-color: #312f37;
+  width: inherit;
+  height: inherit;
+  margin: 0;
+  padding: 0;
+}  
+
+.active-temperature {
+  background-color: #3b4935;
+}
+            
+.search-block {
+  min-width: 400px;
+}
+
+#searchField {
+  border: #fff solid 1px;
+  background-color: transparent;
+  margin: 0;
+  border-radius: 2px;
+}
+         
+.black-bg {
+  display: flex;
+  border-radius: 8px;
+  background-color: #000;
+  opacity: .7;
+  padding: 20px;
+  margin: 12px;
+}
+
+main {
+  display: flex;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.main-content .state {
+  display: flex;
+}
+           
+.map {
+  min-width: 400px;
+}
+
