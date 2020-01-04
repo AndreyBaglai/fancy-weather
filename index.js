@@ -17,7 +17,7 @@ function getBackgroundPhoto() {
     //const proxy = 'https://cors-anywhere.herokuapp.com/';
     const PHOTO_API_TOKEN = 'd5fbdbc4ae0848723de931f78c74fb1622310a4dcbe00be8d17db8343b6f037b';
 
-    return fetch(`https://api.unsplash.com/search/photos?query=kiev&client_id=${PHOTO_API_TOKEN}`)
+    return fetch(`https://api.unsplash.com/search/photos?query=oslo&client_id=${PHOTO_API_TOKEN}`)
         .then(res => res.json());
 }
 
@@ -36,8 +36,14 @@ function init() {
             const picturesBody = photos.results.map(obj => {
                 return obj.urls.raw;
             });
+
+            sessionStorage.setItem('picturesBg', JSON.stringify(picturesBody));
+            if (sessionStorage.getItem('picturesBg')) {
+                console.log('From storage: ', JSON.parse(sessionStorage.getItem('picturesBg')));
+            }
+            
             const randomIndex = Math.floor(Math.random() * picturesBody.length);
-            document.body.style.backgroundImage = `url(${picturesBody[randomIndex]})`;
+            document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]})`;
             console.log('photos: ', picturesBody, randomIndex);
         });
 }
