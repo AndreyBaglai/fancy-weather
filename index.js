@@ -1,3 +1,15 @@
+const refreshBtn = document.getElementById('refresh');
+
+function randomPicturesIndex(max) {
+    return Math.floor(Math.random() * max);
+}
+
+refreshBtn.addEventListener('click', () => {
+    const countPictures = JSON.parse(sessionStorage.getItem('picturesBg')).length;
+    const randomIndex = randomPicturesIndex(countPictures);
+    document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]}`;
+});
+
 function getUserLocation() {
     const LOCATION_API_TOKEN = '2438c6f33c5dbd';
 
@@ -36,8 +48,14 @@ function init() {
             const picturesBody = photos.results.map(obj => {
                 return obj.urls.raw;
             });
-            const randomIndex = Math.floor(Math.random() * picturesBody.length);
-            document.body.style.backgroundImage = `url(${picturesBody[randomIndex]})`;
+
+            sessionStorage.setItem('picturesBg', JSON.stringify(picturesBody));
+            if (sessionStorage.getItem('picturesBg')) {
+                console.log('From storage: ', JSON.parse(sessionStorage.getItem('picturesBg')));
+            }
+
+            const randomIndex = randomPicturesIndex(picturesBody.length);
+            document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]}`;
             console.log('photos: ', picturesBody, randomIndex);
         });
 }
