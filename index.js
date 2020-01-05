@@ -29,7 +29,7 @@ function getBackgroundPhoto() {
     //const proxy = 'https://cors-anywhere.herokuapp.com/';
     const PHOTO_API_TOKEN = 'd5fbdbc4ae0848723de931f78c74fb1622310a4dcbe00be8d17db8343b6f037b';
 
-    return fetch(`https://api.unsplash.com/search/photos?query=kiev&client_id=${PHOTO_API_TOKEN}`)
+    return fetch(`https://api.unsplash.com/search/photos?query=boston&client_id=${PHOTO_API_TOKEN}`)
         .then(res => res.json());
 }
 
@@ -40,6 +40,7 @@ function init() {
             const { loc } = location;
             getWeatherForecast(loc)
                 .then(forecast => {
+                    const { icon, temperature } = forecast.currently;
                     console.log('forecast: ', forecast);
                 });
         });

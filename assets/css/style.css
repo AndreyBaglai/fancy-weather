@@ -6,11 +6,12 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
 }
 
 #root {
-  margin: 50px auto;
+  margin: auto;
   max-width: 1200px;
 }
 
@@ -95,7 +96,36 @@ p {
 .main-content .state {
   display: flex;
 }
-           
+
+.forecast {
+  display: flex;
+}
+
+.temperature-value {
+  display: flex;
+  margin: 100px 50px 100px 180px;
+}
+
+#temperatureNumber {
+  font-size: 126px;
+}
+
+#temperatureDegrees {
+  font-size: 80px;
+  margin-left: 6px;
+}
+
+.description-weather {
+  list-style: none;
+  text-align: center;
+  padding-left: 0;
+  margin: 0;
+}
+ 
+.description-weather > li {
+  padding-bottom: 10px;
+}
+
 .map {
   min-width: 400px;
 }

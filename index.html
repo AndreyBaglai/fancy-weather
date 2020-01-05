@@ -22,7 +22,7 @@
                     </select>
                 </div>
 
-                <div id="temperature">
+                <div id="temperatureBtns">
                     <button id="celsius" class="btn active-temperature">&#8451;</button>
                     <button id="fahrenheit" class="btn">&#8457;</button>
                 </div>
@@ -52,7 +52,22 @@
                 </div>
 
                 <div class="black-bg">
-                    <div class="forecast">7C</div>
+                    <div class="forecast">
+                        <div class="temperature-value">
+                            <div id="temperatureNumber">7</div>
+                            <div id="temperatureDegrees">&#176;</div>
+                        </div>
+
+                        <div class="description">
+                            <canvas id="icon"></canvas>
+                            <ul class="description-weather">
+                                <li>Text 1</li>
+                                <li>Text 2</li>
+                                <li>Text 3</li>
+                                <li>Text 4</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
