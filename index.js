@@ -1,6 +1,30 @@
-const refreshBtn = document.getElementById('refresh');
+const root = document.getElementById('root');
 
-function randomPicturesIndex(max) {
+class App {
+    init = () => {
+        new Location().getLocation()
+            .then(location => {
+                const { loc, city } = location;
+                
+                console.log(location);
+                return Promise.all([
+                    new Pictures().getPictures(city), 
+                    new Weather().getWeather(loc)]);
+            }
+            )
+            .then(([photos, weather]) => {
+                sessionStorage.setItem('weather',JSON.stringify( weather));
+                sessionStorage.setItem('photos', JSON.stringify(photos));
+                })
+
+        const controls = new Controls(new Search().markup).markup;
+        const forecast = new Forecast(new Map().markup).markup;
+
+        root.innerHTML = `${controls}${forecast}`;
+    }
+}
+
+/*function randomPicturesIndex(max) {
     return Math.floor(Math.random() * max);
 }
 
@@ -26,12 +50,12 @@ function getWeatherForecast(locationCoordinates) {
 }
 
 function getBackgroundPhoto() {
-    //const proxy = 'https://cors-anywhere.herokuapp.com/';
+   //const proxy = 'https://cors-anywhere.herokuapp.com/';
     const PHOTO_API_TOKEN = 'd5fbdbc4ae0848723de931f78c74fb1622310a4dcbe00be8d17db8343b6f037b';
 
 
     return fetch(`https://api.unsplash.com/search/photos?query=boston&client_id=${PHOTO_API_TOKEN}`)
-        .then(res => res.json());
+        .then(res => res.json()); 
 }
 
 function init() {
@@ -63,4 +87,4 @@ function init() {
         });
 }
 
-init();
+init();*/

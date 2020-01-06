@@ -6,84 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fancy-weather</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <script src="./assets/js/components/Map.js"></script>
+    <script src="./assets/js/components/Search.js"></script>
+    <script src="./assets/js/components/Forecast.js"></script>
+    <script src="./assets/js/components/Controls.js"></script>
+
+    <script src="assets/js/services/Location.js"></script>
+    <script src="assets/js/services/Pictures.js"></script>
+    <script src="assets/js/services/Weather.js"></script>
 </head>
 
 <body>
-    <div id="root">
-        <header class="controls">
-            <div class="black-bg grow">
-                <button id="refresh" class="btn">Refresh</button>
-
-                <div id="languages">
-                    <select class="btn">
-                        <option>RU</option>
-                        <option>EN</option>
-                    </select>
-                </div>
-
-                <div id="temperatureBtns">
-                    <button id="celsius" class="btn active-temperature">&#8451;</button>
-                    <button id="fahrenheit" class="btn">&#8457;</button>
-                </div>
-            </div>
-
-            <div class="black-bg">
-                <div class="search-block">
-                    <input id="searchField" type="text" placeholder="Search city">
-                    <button id="searchBtn" class="btn">Search</button>
-                </div>
-            </div>
-        </header>
-
-        <main>
-            <div class="main-content grow">
-                <div class="black-bg">
-                    <div class="state">
-                        <p class="country">Ukrain,</p>
-                        <p class="city">Dnipro</p>
-                    </div>
-                </div>
-
-                <div class="black-bg">
-                    <div class="current-date">
-                        <p>Wed 25 December <span class="time">Time</span></p>
-                    </div>
-                </div>
-
-                <div class="black-bg">
-                    <div class="forecast">
-                        <div class="temperature-value">
-                            <div id="temperatureNumber">7</div>
-                            <div id="temperatureDegrees">&#176;</div>
-                        </div>
-
-                        <div class="description">
-                            <canvas id="icon"></canvas>
-                            <ul class="description-weather">
-                                <li>Text 1</li>
-                                <li>Text 2</li>
-                                <li>Text 3</li>
-                                <li>Text 4</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="black-bg">
-                <div class="map">
-                    <div class="mapApi">map</div>
-                    <div class="coordinates">
-                        <p class="latitude">Latitude: 58:1111</p>
-                        <p class="longitude">Longitude: 58:1111</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+    <div id="root"></div>
 
     <script src="./index.js"></script>
+    <script>
+        const app = new App();
+        app.init();
+    </script>
 </body>
 
 </html>
