@@ -1,3 +1,15 @@
+const refreshBtn = document.getElementById('refresh');
+
+function randomPicturesIndex(max) {
+    return Math.floor(Math.random() * max);
+}
+
+refreshBtn.addEventListener('click', () => {
+    const countPictures = JSON.parse(sessionStorage.getItem('picturesBg')).length;
+    const randomIndex = randomPicturesIndex(countPictures);
+    document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]}`;
+});
+
 function getUserLocation() {
     const LOCATION_API_TOKEN = '2438c6f33c5dbd';
 
@@ -17,7 +29,8 @@ function getBackgroundPhoto() {
     //const proxy = 'https://cors-anywhere.herokuapp.com/';
     const PHOTO_API_TOKEN = 'd5fbdbc4ae0848723de931f78c74fb1622310a4dcbe00be8d17db8343b6f037b';
 
-    return fetch(`https://api.unsplash.com/search/photos?query=oslo&client_id=${PHOTO_API_TOKEN}`)
+
+    return fetch(`https://api.unsplash.com/search/photos?query=boston&client_id=${PHOTO_API_TOKEN}`)
         .then(res => res.json());
 }
 
@@ -28,6 +41,7 @@ function init() {
             const { loc } = location;
             getWeatherForecast(loc)
                 .then(forecast => {
+                    const { icon, temperature } = forecast.currently;
                     console.log('forecast: ', forecast);
                 });
         });
@@ -41,9 +55,10 @@ function init() {
             if (sessionStorage.getItem('picturesBg')) {
                 console.log('From storage: ', JSON.parse(sessionStorage.getItem('picturesBg')));
             }
-            
-            const randomIndex = Math.floor(Math.random() * picturesBody.length);
-            document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]})`;
+
+
+            const randomIndex = randomPicturesIndex(picturesBody.length);
+            document.body.style.backgroundImage = `url(${JSON.parse(sessionStorage.getItem('picturesBg'))[randomIndex]}`;
             console.log('photos: ', picturesBody, randomIndex);
         });
 }
