@@ -1,27 +1,41 @@
 const root = document.getElementById('root');
+let city;
+let country;
+let currentTime;
 
 class App {
     init = () => {
-        new Location().getLocation()
+        new Location()
+            .getLocation()
             .then(location => {
-                const { loc, city } = location;
-                
-                console.log(location);
+                const { loc, city, country } = location;
+
+                console.log('location: ', location);
+
                 return Promise.all([
-                    new Pictures().getPictures(city), 
-                    new Weather().getWeather(loc)]);
-            }
-            )
-            .then(([photos, weather]) => {
-                sessionStorage.setItem('weather',JSON.stringify( weather));
-                sessionStorage.setItem('photos', JSON.stringify(photos));
-                })
+                    new Pictures().getPictures(city),
+                    new Weather().getWeather(loc)
+                ]);
+            })
+            .then(([pictures, weather]) => {
+                sessionStorage.setItem('weather', JSON.stringify(weather));
+                sessionStorage.setItem('pictures', JSON.stringify(pictures));
+                console.log('pictures: ', pictures);
+                console.log('weather: ', weather);
+
+                currentTime = weather.currently.time;
+                console.log('time', currentTime);
+            });
 
         const controls = new Controls(new Search().markup).markup;
-        const forecast = new Forecast(new Map().markup).markup;
+        const forecast = new Forecast(new Map().markup, {
+            city,
+            country,
+            currentTime
+        }).markup;
 
         root.innerHTML = `${controls}${forecast}`;
-    }
+    };
 }
 
 /*function randomPicturesIndex(max) {

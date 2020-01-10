@@ -1,21 +1,25 @@
 class Forecast {
-    constructor(el) {
-        this.markup = this.renderForecast(el);
+    constructor(el, data) {
+        this.markup = this.renderForecast(el, data);
     }
 
-    renderForecast(map) {
+    renderForecast(map, data) {
         return `<main>
                     <div class="main-content grow">
                         <div class="black-bg">
                             <div class="state">
-                                <p class="country">Ukrain,</p>
-                                <p class="city">Dnipro</p>
+                                <p class="country">${data.country}, </p>
+                                <p class="city">${data.city}</p>
                             </div>
                         </div>
 
                         <div class="black-bg">
                             <div class="current-date">
-                                <p>Wed 25 December <span class="time">Time</span></p>
+                                <p>${new Date(
+                                    data.currentTime
+                                ).toLocaleDateString()}<span class="time">${new Date(
+            data.currentTime
+        ).toLocaleTimeString()}</span></p>
                             </div>
                         </div>
 
