@@ -21,8 +21,8 @@ class Controls {
     renderSelectLang() {
         return `<div id="languages">
                     <select class="btn">
-                        <option>RU</option>
                         <option>EN</option>
+                        <option>RU</option>
                     </select>
                 </div>`;
     }
@@ -32,5 +32,9 @@ class Controls {
                     <button id="celsius" class="btn active-temperature">&#8451;</button>
                     <button id="fahrenheit" class="btn">&#8457;</button>
                 </div>`;
+    }
+
+    inCelsius(val) {
+        return Math.ceil(((val - 32) * 5) / 9);
     }
 }

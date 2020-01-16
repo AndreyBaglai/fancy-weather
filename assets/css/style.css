@@ -11,46 +11,42 @@ body {
 }
 
 #root {
-  margin: auto;
-  max-width: 1200px;
+    margin: auto;
+    max-width: 1200px;
 }
 
 .black-bg {
-  display: flex;
-  border-radius: 8px;
-  background-color: #000;
-  opacity: .8;
-  padding: 20px;
-  margin: 12px;
+    display: flex;
+    border-radius: 8px;
+    background-color: #000;
+    opacity: 0.8;
+    padding: 20px;
+    margin: 12px;
 }
 
-
 .grow {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 .controls {
-  display: flex;
+    display: flex;
 }
 
 .btn {
-  text-transform: uppercase;
-  border: #fff solid 1px;
-  border-radius: 4px;
-  text-align: center;
-  color: #fff;
-  background-color: #807e82;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-#refresh {
-                
+    text-transform: uppercase;
+    border: #fff solid 1px;
+    border-radius: 4px;
+    text-align: center;
+    color: #fff;
+    background-color: #807e82;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px;
 }
 
 #languages {
-  margin: 0 20px;
+    margin: 0 20px;
 }
 
 select {
@@ -68,65 +64,82 @@ select {
 }  
  */
 .active-temperature {
-  background-color: #3d6e28;
+    background-color: #3d6e28;
 }
-            
+
 .search-block {
-  min-width: 400px;
+    min-width: 400px;
 }
 
 #searchField {
-  border: #fff solid 1px;
-  background-color: transparent;
-  margin: 0;
-  border-radius: 2px;
-  font-size: 16px;
-  color: #fff;
+    border: #fff solid 1px;
+    background-color: transparent;
+    margin: 0;
+    border-radius: 2px;
+    font-size: 16px;
+    color: #fff;
+    padding: 6px;
 }
-         
+
 main {
-  display: flex;
+    display: flex;
 }
 
 p {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.city,
+.country {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.city {
+    margin-left: 10px;
+}
+
+.clock {
+    margin-left: 10px;
 }
 
 .main-content .state {
-  display: flex;
+    display: flex;
 }
 
 .forecast {
-  display: flex;
+    display: flex;
 }
 
 .temperature-value {
-  display: flex;
-  margin: 100px 50px 100px 180px;
+    display: flex;
+    margin: 100px 50px 100px 140px;
 }
 
 #temperatureNumber {
-  font-size: 126px;
+    font-size: 126px;
 }
 
 #temperatureDegrees {
-  font-size: 80px;
-  margin-left: 6px;
+    font-size: 80px;
+    margin-left: 6px;
 }
 
 .description-weather {
-  list-style: none;
-  text-align: center;
-  padding-left: 0;
-  margin: 0;
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+    margin: 0;
+    font-size: 18px;
+    text-transform: uppercase;
 }
- 
+
 .description-weather > li {
-  padding-bottom: 10px;
+    padding-bottom: 12px;
 }
 
 .map {
-  min-width: 400px;
+    min-width: 400px;
 }
-
