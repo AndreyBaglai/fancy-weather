@@ -42,6 +42,14 @@ class Forecast {
                 </main>`;
     }
 
+    setIconWeather(iconText, el) {
+        const skycons = new Skycons({ color: 'white' });
+        const icon = iconText.replace(/-/g, '_').toUpperCase();
+
+        skycons.play();
+        return skycons.set(el, Skycons[icon]);
+    }
+
     setDate(lang) {
         const options = {
             weekday: 'long',

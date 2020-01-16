@@ -35,6 +35,6 @@ class Controls {
     }
 
     inCelsius(val) {
-        return Math.ceil(((val - 32) * 5) / 9);
+        return (temperature = Math.ceil(((val - 32) * 5) / 9));
     }
 }

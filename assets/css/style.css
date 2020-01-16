@@ -115,7 +115,7 @@ p {
 
 .temperature-value {
     display: flex;
-    margin: 100px 50px 100px 140px;
+    margin: auto 100px;
 }
 
 #temperatureNumber {
@@ -138,6 +138,12 @@ p {
 
 .description-weather > li {
     padding-bottom: 12px;
+}
+
+#icon {
+    width: 270px;
+    height: 170px;
+    margin-bottom: 40px;
 }
 
 .map {

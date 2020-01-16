@@ -5,7 +5,7 @@ let temperature;
 let summary;
 let windSpeed;
 let humidity;
-
+let icon;
 
 class App {
     init = () => {
@@ -32,11 +32,13 @@ class App {
                 summary = weather.currently.summary;
                 windSpeed = weather.currently.windSpeed;
                 humidity = weather.currently.humidity;
+                icon = weather.currently.icon;
 
                 const forecast = new Forecast(new Map().markup, {
                     city,
                     country,
                     temperature,
+                    icon,
                     description: {
                         summary,
                         windSpeed,
@@ -48,6 +50,8 @@ class App {
                 const forecastHTML = forecast.markup;
 
                 root.innerHTML = `${controlsHTML}${forecastHTML}`;
+                const canvas = document.getElementById('icon');
+                forecast.setIconWeather(icon, canvas);
             });
     };
 }
