@@ -35,6 +35,7 @@ class Controls {
     }
 
     inCelsius(val) {
-        return (temperature = Math.ceil(((val - 32) * 5) / 9));
+        const celsius = (Math.ceil(((val - 32) * 5) / 9));
+        return celsius > 0 ? '+' + celsius : celsius;
     }
 }

@@ -22,7 +22,7 @@ class Forecast {
                         <div class="black-bg">
                             <div class="forecast">
                                 <div class="temperature-value">
-                                    <div id="temperatureNumber">${data.temperature}</div>
+                                    <div id="temperatureNumber">${data.temperatureC}</div>
                                     <div id="temperatureDegrees">&#176;</div>
                                 </div>
 
@@ -47,6 +47,7 @@ class Forecast {
         const icon = iconText.replace(/-/g, '_').toUpperCase();
 
         skycons.play();
+
         return skycons.set(el, Skycons[icon]);
     }
 
@@ -56,6 +57,7 @@ class Forecast {
             month: 'long',
             day: 'numeric'
         };
+
         return new Date().toLocaleString(lang, options);
     }
 
