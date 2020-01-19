@@ -1,34 +1,35 @@
-class Map {
+class googleMap {
     constructor(coordinates) {
-        this.markup = this.renderMap(coordinates);
+        const coord = coordinates.split(',');
+
+        this.latitude = coord[0];
+        this.longitude = coord[1];
+        
+        this.markup = this.renderMap();
     }
 
-    renderMap(coordinates) {
+    renderMap() {
         return `<div class="black-bg">
                     <div class="map">
                         <div id="mapApi"></div>
                         <div class="coordinates">
-                            ${this.setCoordinates(coordinates)}
+                            ${this.setCoordinates()}
                         </div>
                     </div>
                 </div>`;
     }
 
-    setCoordinates(coordinates) {
-        const coord = coordinates.split(',');
-        const latitude = coord[0];
-        const longitude = coord[1];
-
+    setCoordinates() {
         return `
-            <p class="latitude">Latitude: ${latitude}&#176; N</p>
-            <p class="longitude">Longitude: ${longitude}&#176; W</p>`;
+            <p class="latitude">Latitude: ${this.latitude}&#176; N</p>
+            <p class="longitude">Longitude: ${this.longitude}&#176; W</p>`;
     }
 }
 
 function initMap() {
     const coord = loc.split(',');
     const latitude = +coord[0];
-    const longitude = +coord[1];
+    const longitude = +coord[1]; 
 
     const options = {
         zoom: 8,

@@ -24,7 +24,7 @@ class App {
             })
             .then(([pictures, weather]) => {
                 sessionStorage.setItem('weather', JSON.stringify(weather));
-                //console.log('weather: ', weather);
+                console.log('weather: ', weather);
 
                 const controls = new Controls(new Search().markup);
 
@@ -35,7 +35,7 @@ class App {
                 humidity = weather.currently.humidity;
                 icon = weather.currently.icon;
 
-                const forecast = new Forecast(new Map(loc).markup, {
+                const forecast = new Forecast(new googleMap(loc).markup, {
                     city,
                     country,
                     temperatureC,
@@ -63,34 +63,74 @@ class App {
                 sessionStorage.setItem('links', JSON.stringify(links));
                 document.body.style.backgroundImage = `url(${links[picturesObj.randomPicturesIndex(links.length)]})`;
 
-                document.getElementById('refresh').addEventListener('click', (e) => {
+                document.getElementById('refresh').addEventListener('click', e => {
                     const photos = JSON.parse(sessionStorage.getItem('links'));
                     document.body.style.backgroundImage = `url(${photos[picturesObj.randomPicturesIndex(photos.length)]})`;
                 });
                 //console.log('links: ', links);
             })
             .then(() => {
-               const elMap = document.createElement('script'); 
-               const GOOGLE_MAP_KEY = 'AIzaSyAMQPeEt9WfeEn3cxE6beEAhc1UqCSB8Mk';
-               elMap.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAP_KEY}&callback=initMap`;
-               elMap.setAttribute('async', '');
-               elMap.setAttribute('defer', '');
-               
-               document.body.appendChild(elMap);
+                mapboxgl.accessToken = 'pk.eyJ1IjoibXVzdGFuZzExNyIsImEiOiJjazVrM3loZGMwOTlwM2RxaWw1b3Y3N2MxIn0.C0cjKBuxRm86J52WdF1WFw';
+
+                const coord = loc.split(',');
+                const latitude = +coord[0];
+                const longitude = +coord[1];
+
+                const map = new mapboxgl.Map({
+                    container: 'mapApi',
+                    style: 'mapbox://styles/mapbox/dark-v10',
+                    center: [longitude, latitude],
+                    zoom: 8
+                });
+
+                map.on('load', function() {
+                    map.loadImage('https://cors-anywhere.herokuapp.com/https://i.pinimg.com/originals/86/fd/17/86fd17769a3b2537d2b028601cda7b92.png', function(error, image) {
+                        if (error) throw error;
+
+                        map.addImage('marker', image);
+                        map.addLayer({
+                            id: 'points',
+                            type: 'symbol',
+                            source: {
+                                type: 'geojson',
+                                data: {
+                                    type: 'FeatureCollection',
+                                    features: [
+                                        {
+                                            type: 'Feature',
+                                            geometry: {
+                                                type: 'Point',
+                                                coordinates: [longitude, latitude]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            layout: {
+                                'icon-image': 'marker',
+                                'icon-size': 0.1
+                            }
+                        });
+                    });
+                });
             })
             .then(() => {
-                document.getElementById('fahrenheit').addEventListener('click', (e) => {
+                document.getElementById('fahrenheit').addEventListener('click', e => {
                     e.target.classList.add('active-temperature');
                     document.getElementById('celsius').classList.remove('active-temperature');
+
                     const temp = temperatureF > 0 ? '+' + temperatureF : temperatureF;
+
                     document.getElementById('temperatureNumber').innerHTML = `${temp}`;
                 });
 
-                document.getElementById('celsius').addEventListener('click', (e) => {
+                document.getElementById('celsius').addEventListener('click', e => {
                     e.target.classList.add('active-temperature');
-                    document.getElementById('fahrenheit').classList.remove('active-temperature'); 
+
+                    document.getElementById('fahrenheit').classList.remove('active-temperature');
                     document.getElementById('temperatureNumber').innerHTML = `${temperatureC}`;
                 });
             });
     };
 }
+//const OPENCAGEDATA_MAP_KEY = '77e74e7dec07433f987124688e11e311';
