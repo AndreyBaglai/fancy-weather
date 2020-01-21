@@ -15,7 +15,7 @@ class Forecast {
 
                         <div class="black-bg">
                             <div class="current-date">
-                                <p>${this.setDate('en')}<span class="clock">${this.clock()}</span></p>
+                                <p>${this.setDate('en')}</p>
                             </div>
                         </div>
 
@@ -65,15 +65,15 @@ class Forecast {
         return Math.floor(val * 100) + '%';
     }
 
-    clock() {
-        const time = new Date();
-
-        let hh = time.getHours() < 10 ? '0' + time.getHours() : time.getHours();
-        let mm = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
-        let ss = time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds();
+   /*  clock(time) {
+        const timeCurrent = new Date(time * 1000);
+        //console.log(time, timeCurrent);
+        let hh = timeCurrent.getHours() < 10 ? '0' + timeCurrent.getHours() : timeCurrent.getHours();
+        let mm = timeCurrent.getMinutes() < 10 ? '0' + timeCurrent.getMinutes() : timeCurrent.getMinutes();
+        let ss = timeCurrent.getSeconds() < 10 ? '0' + timeCurrent.getSeconds() : timeCurrent.getSeconds();
 
         return hh + ':' + mm + ':' + ss;
-    }
+    } */
 
     setCountry(country) {
         const countries = {

@@ -7,7 +7,6 @@ class Controls {
         return `<header class="controls">
                     <div class="black-bg grow">
                         ${this.renderRefreshBtn()}
-                        ${this.renderSelectLang()}
                         ${this.renderTemperatureBtns()}                   
                     </div>
                     ${blockSearch} 
@@ -16,15 +15,6 @@ class Controls {
 
     renderRefreshBtn() {
         return `<button id="refresh" class="btn">Refresh</button>`;
-    }
-
-    renderSelectLang() {
-        return `<div id="languages">
-                    <select class="btn">
-                        <option>EN</option>
-                        <option>RU</option>
-                    </select>
-                </div>`;
     }
 
     renderTemperatureBtns() {

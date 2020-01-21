@@ -1,10 +1,10 @@
-class googleMap {
+class Map {
     constructor(coordinates) {
         const coord = coordinates.split(',');
 
-        this.latitude = coord[0];
-        this.longitude = coord[1];
-        
+        this.latitude = +coord[0];
+        this.longitude = +coord[1];
+
         this.markup = this.renderMap();
     }
 
@@ -24,21 +24,56 @@ class googleMap {
             <p class="latitude">Latitude: ${this.latitude}&#176; N</p>
             <p class="longitude">Longitude: ${this.longitude}&#176; W</p>`;
     }
-}
 
-function initMap() {
-    const coord = loc.split(',');
-    const latitude = +coord[0];
-    const longitude = +coord[1]; 
+    createMapbox() {
+        const MAPBOX_API_KEY = 'pk.eyJ1IjoibXVzdGFuZzExNyIsImEiOiJjazVrM3loZGMwOTlwM2RxaWw1b3Y3N2MxIn0.C0cjKBuxRm86J52WdF1WFw';
+        
+        mapboxgl.accessToken = MAPBOX_API_KEY;
 
-    const options = {
-        zoom: 8,
-        center: { lat: latitude, lng: longitude }
-    };
+        const map = new mapboxgl.Map({
+            container: 'mapApi',
+            style: 'mapbox://styles/mapbox/dark-v10',
+            center: [this.longitude, this.latitude],
+            zoom: 8
+        });
 
-    const map = new google.maps.Map(document.getElementById('mapApi'), options);
-    const marker = new google.maps.Marker({
-        position: { lat: latitude, lng: longitude },
-        map: map
-    });
+        this.setMarker(map);
+    }
+
+    setMarker(map) {
+        const self = this;
+        const markerIcon = 'https://i.pinimg.com/originals/86/fd/17/86fd17769a3b2537d2b028601cda7b92.png';
+        const proxy = 'https://cors-anywhere.herokuapp.com/';
+
+        map.on('load', function() {
+            map.loadImage(`${proxy}${markerIcon}`, function(error, image) {
+                if (error) throw error;
+
+                map.addImage('marker', image);
+                map.addLayer({
+                    id: 'points',
+                    type: 'symbol',
+                    source: {
+                        type: 'geojson',
+                        data: {
+                            type: 'FeatureCollection',
+                            features: [
+                                {
+                                    type: 'Feature',
+                                    geometry: {
+                                        type: 'Point',
+                                        coordinates: [self.longitude, self.latitude]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    layout: {
+                        'icon-image': 'marker',
+                        'icon-size': 0.1
+                    }
+                });
+            });
+        });
+    }
 }

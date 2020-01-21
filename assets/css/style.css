@@ -19,7 +19,7 @@ body {
     display: flex;
     border-radius: 8px;
     background-color: #000;
-    opacity: 0.8;
+    background: rgba(0, 0, 0, 0.8);
     padding: 20px;
     margin: 12px;
 }
@@ -45,6 +45,10 @@ body {
     padding: 6px;
 }
 
+#refresh {
+    margin-right: 30px;
+}
+
 #languages {
     margin: 0 20px;
 }
@@ -55,14 +59,6 @@ select {
     padding: 0;
 }
 
-/* #temperature button {
-  background-color: #312f37;
-  width: inherit;
-  height: inherit;
-  margin: 0;
-  padding: 0;
-}  
- */
 .active-temperature {
     background-color: #3d6e28;
 }
@@ -145,10 +141,6 @@ p {
     width: 270px;
     height: 130px;
     margin-bottom: 40px;
-}
-
-.black-bg .map {
-    background-color: #000;
 }
 
 #mapApi {

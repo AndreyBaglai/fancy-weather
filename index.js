@@ -18,24 +18,24 @@ class App {
                 city = location.city;
                 country = location.country;
 
-                //console.log('location: ', location);
+                console.log('location: ', location);
 
                 return Promise.all([new Pictures().getPictures(city), new Weather().getWeather(loc, 'en')]);
             })
             .then(([pictures, weather]) => {
-                sessionStorage.setItem('weather', JSON.stringify(weather));
                 console.log('weather: ', weather);
 
                 const controls = new Controls(new Search().markup);
 
                 temperatureF = Math.floor(weather.currently.temperature);
                 temperatureC = controls.inCelsius(weather.currently.temperature);
+
                 summary = weather.currently.summary;
                 windSpeed = Math.floor(weather.currently.windSpeed);
                 humidity = weather.currently.humidity;
                 icon = weather.currently.icon;
 
-                const forecast = new Forecast(new googleMap(loc).markup, {
+                const forecast = new Forecast(new Map(loc).markup, {
                     city,
                     country,
                     temperatureC,
@@ -51,6 +51,7 @@ class App {
                 const forecastHTML = forecast.markup;
 
                 root.innerHTML = `${controlsHTML}${forecastHTML}`;
+
                 const canvas = document.getElementById('icon');
                 forecast.setIconWeather(icon, canvas);
 
@@ -63,56 +64,14 @@ class App {
                 sessionStorage.setItem('links', JSON.stringify(links));
                 document.body.style.backgroundImage = `url(${links[picturesObj.randomPicturesIndex(links.length)]})`;
 
-                document.getElementById('refresh').addEventListener('click', e => {
-                    const photos = JSON.parse(sessionStorage.getItem('links'));
-                    document.body.style.backgroundImage = `url(${photos[picturesObj.randomPicturesIndex(photos.length)]})`;
+                document.getElementById('refresh').addEventListener('click', () => {
+                    const links = JSON.parse(sessionStorage.getItem('links'));
+                    document.body.style.backgroundImage = `url(${links[picturesObj.randomPicturesIndex(links.length)]})`;
                 });
-                //console.log('links: ', links);
             })
             .then(() => {
-                mapboxgl.accessToken = 'pk.eyJ1IjoibXVzdGFuZzExNyIsImEiOiJjazVrM3loZGMwOTlwM2RxaWw1b3Y3N2MxIn0.C0cjKBuxRm86J52WdF1WFw';
-
-                const coord = loc.split(',');
-                const latitude = +coord[0];
-                const longitude = +coord[1];
-
-                const map = new mapboxgl.Map({
-                    container: 'mapApi',
-                    style: 'mapbox://styles/mapbox/dark-v10',
-                    center: [longitude, latitude],
-                    zoom: 8
-                });
-
-                map.on('load', function() {
-                    map.loadImage('https://cors-anywhere.herokuapp.com/https://i.pinimg.com/originals/86/fd/17/86fd17769a3b2537d2b028601cda7b92.png', function(error, image) {
-                        if (error) throw error;
-
-                        map.addImage('marker', image);
-                        map.addLayer({
-                            id: 'points',
-                            type: 'symbol',
-                            source: {
-                                type: 'geojson',
-                                data: {
-                                    type: 'FeatureCollection',
-                                    features: [
-                                        {
-                                            type: 'Feature',
-                                            geometry: {
-                                                type: 'Point',
-                                                coordinates: [longitude, latitude]
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            layout: {
-                                'icon-image': 'marker',
-                                'icon-size': 0.1
-                            }
-                        });
-                    });
-                });
+                const mapbox = new Map(loc);
+                mapbox.createMapbox();
             })
             .then(() => {
                 document.getElementById('fahrenheit').addEventListener('click', e => {
@@ -130,7 +89,73 @@ class App {
                     document.getElementById('fahrenheit').classList.remove('active-temperature');
                     document.getElementById('temperatureNumber').innerHTML = `${temperatureC}`;
                 });
+
+                document.getElementById('searchBtn').addEventListener('click', () => {
+                    const inputCity = document.getElementById('searchField').value;
+
+                    new Geocoder()
+                        .getGeoData(inputCity)
+                        .then(geoData => {
+                            if (!geoData.results.length) return;
+                            console.log('geo: ', geoData.results[0]);
+
+                            loc = geoData.results[0].geometry.lat + ',' + geoData.results[0].geometry.lng;
+                            city = inputCity;
+                            country = geoData.results[0].components['ISO_3166-1_alpha-2'];
+
+                            return Promise.all([new Pictures().getPictures(city), new Weather().getWeather(loc, 'en')]);
+                        })
+                        .then(([pictures, weather]) => {
+                            //sessionStorage.setItem('weather', JSON.stringify(weather));
+                            console.log('weather: ', weather);
+
+                            const controls = new Controls(new Search().markup);
+
+                            temperatureF = Math.floor(weather.currently.temperature);
+                            temperatureC = controls.inCelsius(weather.currently.temperature);
+                            summary = weather.currently.summary;
+                            windSpeed = Math.floor(weather.currently.windSpeed);
+                            humidity = weather.currently.humidity;
+                            icon = weather.currently.icon;
+
+                            const forecast = new Forecast(new Map(loc).markup, {
+                                city,
+                                country,
+                                temperatureC,
+                                icon,
+                                description: {
+                                    summary,
+                                    windSpeed,
+                                    humidity
+                                }
+                            });
+
+                            const controlsHTML = controls.markup;
+                            const forecastHTML = forecast.markup;
+
+                            root.innerHTML = `${controlsHTML}${forecastHTML}`;
+                            const canvas = document.getElementById('icon');
+                            forecast.setIconWeather(icon, canvas);
+
+                            return pictures;
+                        })
+                        .then(pictures => {
+                            const picturesObj = new Pictures();
+                            const links = picturesObj.parsePictures(pictures);
+
+                            sessionStorage.setItem('links', JSON.stringify(links));
+                            document.body.style.backgroundImage = `url(${links[picturesObj.randomPicturesIndex(links.length)]})`;
+
+                            document.getElementById('refresh').addEventListener('click', e => {
+                                const links = JSON.parse(sessionStorage.getItem('links'));
+                                document.body.style.backgroundImage = `url(${links[picturesObj.randomPicturesIndex(links.length)]})`;
+                            });
+                        })
+                        .then(() => {
+                            const mapbox = new Map(loc);
+                            mapbox.createMapbox();
+                        });
+                });
             });
     };
 }
-//const OPENCAGEDATA_MAP_KEY = '77e74e7dec07433f987124688e11e311';
