@@ -15,9 +15,4 @@ class Pictures {
             return obj.urls.raw;
         });
     }
-
-    getPhotosBg(links) {
-        const link = links[0];
-        console.log(link);
-    }
 }
