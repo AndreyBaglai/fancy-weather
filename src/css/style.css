@@ -6,7 +6,6 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    overflow-x: hidden;
     display: flex;
 }
 
@@ -152,4 +151,35 @@ p {
 .coordinates {
     margin-top: 30px;
     text-align: right;
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        background-size: auto;
+    }
+
+    #root {
+        margin: 0 auto;
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .controls,
+    main {
+        display: block;
+    }
+
+    #mapApi {
+        width: 500px;
+        height: 500px;
+    }
+
+    .coordinates {
+        text-align: left;
+    }
+
+    .map {
+        margin: 0 auto;
+    }
 }
