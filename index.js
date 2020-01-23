@@ -145,10 +145,13 @@ class App {
                 })
                 .then(() => {
                     this.initHandlers();
+                })
+                .catch((e) => {
+                    console.log('Invalid city', e);
                 });
         });
     }
-
+    
     onSearchInput() {
         document.getElementById('searchField').addEventListener('change', () => {
             const inputCity = document.getElementById('searchField').value;
@@ -207,6 +210,9 @@ class App {
                 })
                 .then(() => {
                     this.initHandlers();
+                })
+                .catch((e) => {
+                    console.log('Invalid city', e);
                 });
         });
     }
