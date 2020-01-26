@@ -32,6 +32,8 @@ class Forecast {
                                         <li>${data.description.summary}</li>
                                         <li>WIND: ${data.description.windSpeed} M/S</li>
                                         <li>HUMIDITY: ${this.setHumidity(data.description.humidity)}</li>
+                                        <li>PRESSURE: ${data.pressure} mm Hg</li>
+                                        <li>VISIBILITY: ${data.visibility} KM</li>
                                     </ul>
                                 </div>
                             </div>

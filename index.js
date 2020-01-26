@@ -7,6 +7,8 @@ let windSpeed;
 let humidity;
 let icon;
 let loc;
+let pressure;
+let visibility;
 
 class App {
     constructor() {
@@ -29,7 +31,6 @@ class App {
                 return Promise.all([this._picturesBody.getPictures(city), this._weather.getWeather(loc, 'en')]);
             })
             .then(([pictures, weather]) => {
-                console.log('weather: ', weather);
                 const controls = new Controls(new Search().markup);
 
                 temperatureF = Math.floor(weather.currently.temperature);
@@ -39,12 +40,16 @@ class App {
                 windSpeed = Math.floor(weather.currently.windSpeed);
                 humidity = weather.currently.humidity;
                 icon = weather.currently.icon;
+                pressure = Math.floor(weather.currently.pressure);
+                visibility = Math.floor(weather.currently.visibility);
 
                 const forecast = new Forecast(new Map(loc).markup, {
                     city,
                     country,
                     temperatureC,
                     icon,
+                    pressure,
+                    visibility,
                     description: {
                         summary,
                         windSpeed,
@@ -101,8 +106,6 @@ class App {
                     return Promise.all([this._picturesBody.getPictures(city), this._weather.getWeather(loc, 'en')]);
                 })
                 .then(([pictures, weather]) => {
-                    console.log('weather: ', weather);
-
                     const controls = new Controls(new Search().markup);
 
                     temperatureF = Math.floor(weather.currently.temperature);
@@ -111,12 +114,16 @@ class App {
                     windSpeed = Math.floor(weather.currently.windSpeed);
                     humidity = weather.currently.humidity;
                     icon = weather.currently.icon;
+                    pressure = Math.floor(weather.currently.pressure);
+                    visibility = Math.floor(weather.currently.visibility);
 
                     const forecast = new Forecast(new Map(loc).markup, {
                         city,
                         country,
                         temperatureC,
                         icon,
+                        pressure,
+                        visibility,
                         description: {
                             summary,
                             windSpeed,
@@ -147,7 +154,7 @@ class App {
                     this.initHandlers();
                 })
                 .catch((e) => {
-                    console.log('Invalid city', e);
+                    this.invalidCity();
                 });
         });
     }
@@ -176,12 +183,16 @@ class App {
                     windSpeed = Math.floor(weather.currently.windSpeed);
                     humidity = weather.currently.humidity;
                     icon = weather.currently.icon;
+                    pressure = Math.floor(weather.currently.pressure);
+                    visibility = Math.floor(weather.currently.visibility);
 
                     const forecast = new Forecast(new Map(loc).markup, {
                         city,
                         country,
                         temperatureC,
                         icon,
+                        pressure,
+                        visibility,
                         description: {
                             summary,
                             windSpeed,
@@ -212,9 +223,21 @@ class App {
                     this.initHandlers();
                 })
                 .catch((e) => {
-                    console.log('Invalid city', e);
+                    this.invalidCity();
                 });
         });
+    }
+
+    invalidCity() {
+        const msg = document.getElementById('invalidCity');
+        const delay = 2000;
+
+        msg.style.display = 'block';
+        
+        setTimeout(() => {
+            msg.style.display = 'none';
+            document.getElementById('searchField').value = '';
+        }, delay);  
     }
 
     onFahrenheit() {

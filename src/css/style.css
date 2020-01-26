@@ -48,16 +48,6 @@ body {
     margin-right: 30px;
 }
 
-#languages {
-    margin: 0 20px;
-}
-
-select {
-    width: inherit;
-    height: inherit;
-    padding: 0;
-}
-
 .active-temperature {
     background-color: #3d6e28;
 }
@@ -93,10 +83,6 @@ p {
 }
 
 .city {
-    margin-left: 10px;
-}
-
-.clock {
     margin-left: 10px;
 }
 
@@ -142,6 +128,22 @@ p {
     margin-bottom: 40px;
 }
 
+.search-block {
+    position: relative;
+}
+
+#invalidCity {
+    position: absolute;
+    left: 0;
+    top: 38px;
+    background-color: #fff;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 5px;
+    z-index: 1;
+    display: none;
+}
+
 #mapApi {
     height: 80%;
     min-width: 400px;
@@ -159,12 +161,15 @@ p {
     }
 
     #root {
-        margin: 0 auto;
         max-width: none;
     }
 }
 
 @media screen and (max-width: 960px) {
+    body {
+        font-size: 26px;
+    }
+
     .controls,
     main {
         display: block;
@@ -173,6 +178,10 @@ p {
     #mapApi {
         width: 500px;
         height: 500px;
+    }
+
+    .temperature-value {
+        margin: auto 40px;
     }
 
     .coordinates {
