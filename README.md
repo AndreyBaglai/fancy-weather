@@ -1,5 +1,5 @@
-# Приложение - прогноз погоды
+# Application - weather forecast
 
 -   HTML, CSS, Javascript.
--   работа с API.
--   получение данных при помощи асинхронных запросов(fetch).
+-   Work with API.
+-   Retrieving data using asynchronous requests (fetch)..
